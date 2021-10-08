@@ -60,6 +60,7 @@ export default function MiddleLower() {
                 </>
             }
             <SpanBox />
+            <DoubleDots/>
         </div>
     )
 }

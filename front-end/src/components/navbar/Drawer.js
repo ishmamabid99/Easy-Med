@@ -13,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 const DrawerComponent = () => {
   const useStyles = makeStyles(theme => ({
 
-    drawerContainer:{}
+    drawerContainer: {}
     ,
     iconButtonContainer: {
       marginLeft: 'auto',
@@ -23,7 +23,7 @@ const DrawerComponent = () => {
     menuIconToggle: {
       fontSize: '3rem',
     },
-    
+
   }));
 
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -34,14 +34,14 @@ const DrawerComponent = () => {
     <>
       <Drawer
         anchor='right'
-        classes={{paper: classes.drawerContainer}}
+        classes={{ paper: classes.drawerContainer }}
         onClose={() => setOpenDrawer(false)}
         open={openDrawer}
         onOpen={() => setOpenDrawer(true)}>
         <List>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
-              <ListItemText> Features</ListItemText>
+              <ListItemText onClick={() => { window.location.href = '/' }}> Home</ListItemText>
             </ListItemIcon>
           </ListItem>
 
@@ -59,12 +59,17 @@ const DrawerComponent = () => {
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
-              <ListItemText> Partners</ListItemText>
+              <ListItemText onClick={() => {
+                window.location.href = '/login'
+               }
+              }>Login</ListItemText>
             </ListItemIcon>
           </ListItem>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
-              <ListItemText> Ask for help</ListItemText>
+              <ListItemText onClick={()=>{
+                window.location.href='/signup'
+              }}> Signup</ListItemText>
             </ListItemIcon>
           </ListItem>
         </List>

@@ -10,7 +10,7 @@ const useStyles= makeStyles((theme)=>({
 function Footer() {
     const classes= useStyles();
     return (
-        <div id="Contact">
+        <div id="contact">
             <Box className={classes.root}>
                 
             </Box>

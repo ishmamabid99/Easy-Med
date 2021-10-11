@@ -103,7 +103,7 @@ function Lock(props) {
 }
 
 
-function SignUp() {
+function OrganizationSignUp() {
     const classes = useStyles();
     const [password, setPassword] = useState('password');
     const [password2, setPassword2] = useState('password')
@@ -124,7 +124,7 @@ function SignUp() {
             <Box className={classes.root} align='center'>
                 <Box className={classes.form}>
                     <Typography className={classes.TypographyTitle}>
-                        Sign up as a regular user
+                        Sign up as an organization
                     </Typography>
                     <form noValidate autoComplete='off'>
                         <TextField
@@ -219,4 +219,4 @@ function SignUp() {
     )
 }
 
-export default SignUp
+export default OrganizationSignUp

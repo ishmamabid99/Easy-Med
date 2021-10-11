@@ -9,8 +9,9 @@ import {
   Drawer,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-
-const DrawerComponent = () => {
+import {Link} from 'react-scroll'
+const DrawerComponent = (props) => {
+  const { button1, button2, button3, button4 } = props;
   const useStyles = makeStyles(theme => ({
 
     drawerContainer: {}
@@ -29,6 +30,9 @@ const DrawerComponent = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   //Css
+  const handleClick = () => {
+    window.location.href = '/'
+  }
   const classes = useStyles();
   return (
     <>
@@ -38,40 +42,59 @@ const DrawerComponent = () => {
         onClose={() => setOpenDrawer(false)}
         open={openDrawer}
         onOpen={() => setOpenDrawer(true)}>
+        
         <List>
+        {!button1?<></>:
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
-              <ListItemText onClick={() => { window.location.href = '/' }}> Home</ListItemText>
+              <ListItemText onClick={handleClick}> {button1}</ListItemText>
             </ListItemIcon>
           </ListItem>
-
+        }
+        {!button2?<></>:
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
-              <ListItemText> Pricing</ListItemText>
+              <ListItemText>{button2}</ListItemText>
             </ListItemIcon>
           </ListItem>
-
+        }
+        {!button3?<></>:
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
-              <ListItemText> User Guide</ListItemText>
+              <ListItemText>{button3}</ListItemText>
             </ListItemIcon>
           </ListItem>
-
+        }
+        {!button4?<></>:
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
-              <ListItemText onClick={() => {
-                window.location.href = '/login'
-               }
-              }>Login</ListItemText>
+              <Link to='contact'>
+                <ListItemText>{button4}</ListItemText>
+              </Link>
             </ListItemIcon>
           </ListItem>
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <ListItemText onClick={()=>{
-                window.location.href='/signup'
-              }}> Signup</ListItemText>
-            </ListItemIcon>
-          </ListItem>
+        }
+          {props.state ?
+            <>
+              <ListItem divider button onClick={() => setOpenDrawer(false)}>
+                <ListItemIcon>
+                  <ListItemText onClick={() => {
+                    window.location.href = '/login'
+                  }
+                  }>Login</ListItemText>
+                </ListItemIcon>
+              </ListItem>
+              <ListItem divider button onClick={() => setOpenDrawer(false)}>
+                <ListItemIcon>
+                  <ListItemText onClick={() => {
+                    window.location.href = '/signup'
+                  }}> Signup</ListItemText>
+                </ListItemIcon>
+              </ListItem>
+            </>
+            :
+            <></>
+          }
         </List>
       </Drawer>
       {/* Since this is inside our toolbar we can push it to the end of the toolbar */}

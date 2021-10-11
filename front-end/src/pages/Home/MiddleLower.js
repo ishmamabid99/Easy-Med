@@ -12,13 +12,14 @@ const useStyles = makeStyles((theme) => ({
     title: {
         paddingRight: theme.spacing(5),
         paddingBottom: theme.spacing(1),
-        fontFamily: 'Roboto Condensed',
+        fontFamily: 'Abhaya Libre',
         fontSize: "3.5rem"
+        
     },
     titleSm: {
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3),
-        fontFamily: 'Roboto Condensed',
+        fontFamily: 'Abhaya Libre',
         fontSize: "2.5rem"
     }
 }));
@@ -60,7 +61,7 @@ export default function MiddleLower() {
                 </>
             }
             <SpanBox />
-            <DoubleDots/>
+            <DoubleDots />
         </div>
     )
 }

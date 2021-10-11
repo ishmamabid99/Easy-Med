@@ -1,28 +1,35 @@
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import Header from './Header';
 import Middle from './Middle';
 import MiddleLower from './MiddleLower';
-import Aos from 'aos';
-import 'aos/dist/aos.css'
+
+import MyAppBar from '../../components/navbar/MyAppBar';
+import Footer from '../../components/Footer/Footer';
+import Pricing from './Pricing';
 
 function Home() {
-    useEffect(() => {
-        Aos.init(
-            {
-                duration: 2000
-            }
-        )
-    }, [])
+
     return (
         <>
+            <MyAppBar
+                button1='Home'
+                button2='Pricing'
+                button3='User guide'
+                button4='Contact us'
+                state = {true}
+            />
             <Header />
-            <div data-aos='fade-up' >
+            <>
                 <Middle />
-            </div>
-            <div data-aos='fade-up' >
+            </>
+            < >
                 <MiddleLower />
-            </div>
+            </>
+            <>
+                <Pricing/>
+            </>
+            <Footer />
 
         </>
     )

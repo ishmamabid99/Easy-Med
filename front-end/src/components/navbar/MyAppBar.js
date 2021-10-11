@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Avatar, Button, Grid, Typography, useTheme, useMediaQuery, Box } from '@material-ui/core';
 import DrawerComponent from './Drawer';
-
+import { Link } from 'react-scroll';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,9 +20,6 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
         width: theme.spacing(5),
         height: theme.spacing(5),
-        "&:hover": {
-            backgroundColor: "#fff",
-        },
     },
     h4: {
         flexGrow: 0.45,
@@ -36,25 +33,29 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(4)
     },
     ButtonReg: {
-    
+
         fontFamily: "Gowun",
         fontWeight: "700",
-        fontSize:"1rem",
-        marginLeft:"2%",
+        fontSize: "1rem",
+        marginLeft: "2%",
         color: "#2C394B"
         ,
-        "&:hover":{
+        "&:hover": {
             background: "#2C394B",
-            color:"#fff"
+            color: "#fff"
         }
     }
 
 }));
 
-export default function MyAppBar() {
+export default function MyAppBar(props) {
     const classes = useStyles();
     const theme = useTheme();
+    const onLandingPage = props.state;
     const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
+    const handleClick = () => {
+        window.location.href = '/'
+    }
     return (
 
         <Box className={classes.root}>
@@ -65,21 +66,33 @@ export default function MyAppBar() {
                             <Avatar src="../logo512.png" className={classes.large} />
                             <Typography className={classes.h4}>Easy Med</Typography>
                             {isMatch ? <>
-                                <DrawerComponent />
+                                <DrawerComponent
+                                    {...props}
+                                />
                             </> :
                                 <>
-                                    <Button onClick={() => {
-                                        window.location.href = '/'
-                                    }} className={classes.Button} color="inherit">Home</Button>
-                                    <Button className={classes.Button} color="inherit">Pricing</Button>
-                                    <Button className={classes.Button} color="inherit">User Guide</Button>
-                                    <Button onClick={() => {
-                                        window.location.href = '/#Contact'
-                                    }} className={classes.Button} color="inherit">Contact Us</Button>
-                                    <div style={{ marginLeft: "5%" , width:"200px" }}>
-                                        <Button onClick={()=>{window.location.href='/login'}} variant='outlined' className={classes.ButtonReg} color="inherit">Login</Button>
-                                        <Button onClick={()=>{window.location.href='/signup'}} variant='outlined' className={classes.ButtonReg} color="inherit">Signup</Button>
-                                    </div>
+                                    {!props.button1?<></>:
+
+                                        <Button onClick={handleClick} className={classes.Button} color="inherit">{props.button1}</Button>
+                                    }
+                                    {!props.button2?<></>:
+                                        <Button className={classes.Button} color="inherit">{props.button2}</Button>
+                                    }
+                                    {!props.button3?<></>:
+                                        <Button className={classes.Button} color="inherit">{props.button3}</Button>
+                                    }
+                                    {!props.button4?<></>:
+                                    <Button className={classes.Button} color="inherit">
+                                        <Link to='contact' smooth={true} duration={0}>{props.button4}</Link>
+                                    </Button>
+                                    }
+                                    {onLandingPage ?
+                                        <div style={{ marginLeft: "5%", width: "200px" }}>
+                                            <Button onClick={() => { window.location.href = '/login' }} variant='outlined' className={classes.ButtonReg} color="inherit">Login</Button>
+                                            <Button onClick={() => { window.location.href = '/signup' }} variant='outlined' className={classes.ButtonReg} color="inherit">Signup</Button>
+                                        </div> :
+                                        <></>
+                                    }
                                 </>}
                         </Toolbar>
                     </AppBar>

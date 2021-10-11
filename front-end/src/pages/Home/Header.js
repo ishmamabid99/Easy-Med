@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(5),
         paddingTop: theme.spacing(5),
         paddingBottom: theme.spacing(0.01),
-        fontFamily: 'Roboto Condensed',
+        fontFamily: "Abhaya libre",
         fontSize: "3.5rem"
     },
     titleSm: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(3),
         paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(0.01),
-        fontFamily: 'Roboto Condensed',
+        fontFamily: "Abhaya libre",
         fontSize: "2.5rem"
     },
     decription: {
@@ -91,7 +91,9 @@ function Header() {
                 }
                 <Grid container className={classes.root} align="center" justify="center" alignItems="center"  >
                     <Grid item xs={12} sm={4} md={6}>
-                        <Button variant="contained" className={classes.Button}>Try For Free</Button>
+                        <Button onClick={()=>{
+                            window.location.href='/signup'
+                        }} variant="contained" className={classes.Button}>Try For Free</Button>
                     </Grid>
                 </Grid>`
             </Box>

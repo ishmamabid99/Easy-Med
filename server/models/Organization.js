@@ -22,11 +22,22 @@ const organizationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    products: {
+        type: String,
+        required: false
+    },
+    sales: {
+        type: String,
+        required: false
+    },
     name: {
         type: String,
         required: true
+    },
+    img: {
+        type: String,
+        required: false
     }
-
 });
 
 const Organization = mongoose.model('organization', organizationSchema);

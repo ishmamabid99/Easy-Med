@@ -74,9 +74,10 @@ function SignUp() {
     }
     const handleSubmit = async () => {
         const res = await addUser(data);
+        console.log(res)
         if (res) {
             SwlSuccess();
-            navigate.push('/login')
+            window.location.href = '/login';
 
         }
     }
@@ -84,11 +85,10 @@ function SignUp() {
         if (data && data.email && data.password && data.name) {
             if (validateEmail(data.email) && data.password === data.re_type) {
                 const result = await checkRegistration(data.email);
-                console.log(result)
                 if (!result) {
                     const rand = genRand();
                     setVcode(rand);
-                    sendMail(data.email);
+                    sendMail(data.email, rand);
                     setvState(true);
                 }
                 else {

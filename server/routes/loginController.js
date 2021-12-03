@@ -50,10 +50,13 @@ module.exports.addUser = async (req, res) => {
         bcrypt.hash(data.password, 10, function (err, hash) {
             data.password = hash.toString();
             data = { ...data, role: "USER" }
-            const User = new User(data);
-            User.save(err => {
+            const user = new User(data);
+            user.save(err => {
                 if (!err) {
                     res.status(200).json('added successfully')
+                }
+                else {
+                    console.log(err)
                 }
             });
         })

@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode'
 import { CircularProgress, makeStyles } from '@material-ui/core'
 import UserApp from './User/UserApp'
 import OrganizationApp from './Organization/OrganizationApp'
+import { getInfo } from '../../methods/getData'
 const useStyles = makeStyles(theme => ({
     progressBar: {
 
@@ -22,26 +23,25 @@ const useStyles = makeStyles(theme => ({
 function LoggdApp() {
     const classes = useStyles();
     const [state, setState] = useState(undefined)
-    function getData() {
+    async function getData() {
         const data = jwt_decode(Cookies.get('access'));
-        return data;
+        const res = await getInfo(data._id);
+        Promise.all([res]).then(() => {
+            console.log(res.data)
+            setState(res.data);
+        })
     }
     useEffect(() => {
-        const data = getData();
-        setState({
-            _id: data._id,
-            _role: data._role,
-            _name: data._name
-        })
+        getData();
     }, [])
     return (
         <>
             <div>
-                <LoggedAppBar />
+                <LoggedAppBar state={state} />
             </div>
             {state ?
                 <div >
-                    {state._role === 'USER' ?
+                    {state.role === 'USER' ?
                         <UserApp state={state} />
                         :
                         <OrganizationApp state={state} />

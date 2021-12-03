@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { AppBar, Avatar, Box, Button, Grid, IconButton, makeStyles, MenuItem, Modal, Toolbar, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import LogOut from '@material-ui/icons/ExitToApp'
+import Cart from '@material-ui/icons/ShoppingCart'
 import Cookies from 'js-cookie'
+import jwt_decode from 'jwt-decode';
 const useStyles = makeStyles(theme => ({
     title: {
         fontFamily: "Abhaya libre",
@@ -72,7 +74,9 @@ const useStyles = makeStyles(theme => ({
     },
 
 }))
-function LoggedAppBar() {
+function LoggedAppBar(props) {
+    const token = Cookies.get('access');
+    const role = jwt_decode(token)._role;
     const classes = useStyles();
     const [modal, setModal] = useState(false);
     const handleLogout = () => {
@@ -82,7 +86,6 @@ function LoggedAppBar() {
         setModal(false)
     }
     const logout = () => {
-
         Cookies.remove('access');
         window.location.href = '/login'
     }
@@ -111,6 +114,15 @@ function LoggedAppBar() {
                             <MenuItem component={Link} to='/app' className={classes.title}>Easy-Med</MenuItem>
                         </Toolbar>
                         <Toolbar>
+                            {role === 'LOCAL' ?
+                                <Link to='/cart'>
+                                    <IconButton>
+                                        <Cart className={classes.icon} />
+                                    </IconButton>
+                                </Link>
+                                :
+                                null
+                            }
                             <IconButton onClick={handleLogout}>
                                 <LogOut className={classes.icon} />
                             </IconButton>

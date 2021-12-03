@@ -34,3 +34,17 @@ export const SwlLoginError = () => {
         text: "Login failed!"
     })
 }
+export const SwlSubmitErrorFrom = () => {
+    Swal.fire({
+        icon: "error",
+        title: "Failed...",
+        text: "Please complete the form"
+    })
+}
+export const SwlSubmitCart = () => {
+    Swal.fire({
+        icon: 'success',
+        title: 'Done...',
+        text: 'Please checkout from cart to confirm'
+    })
+}

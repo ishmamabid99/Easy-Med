@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Login from "./pages/Login"
 import SignUp from './pages/SignUp';
 import LoggdApp from './pages/AfterLogged/LoggdApp';
+import Cart from './pages/AfterLogged/Cart';
 import OrganizationSignUp from './pages/OrganizationSignUp';
 import AuthApi from './AuthApi'
 import { checkState } from './methods/getData';
@@ -44,6 +45,7 @@ const Routes = () => {
       <ProtectedLogin path="/signup" auth={Auth.auth} component={SignUp} />
       <ProtectedLogin path="/organization-signup" auth={Auth.auth} component={OrganizationSignUp} />
       <ProtectedRoute path='/app' auth={Auth.auth} component={LoggdApp} />
+      <ProtectedRoute path='/cart' auth={Auth.auth} component={Cart} />
     </Switch>
   )
 }

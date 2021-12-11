@@ -3,13 +3,14 @@ import React, { useState } from 'react'
 import { getInventory } from '../../../methods/getData'
 const useStyles = makeStyles(theme => ({
     root: {
-        marginLeft: 250,
+        marginLeft: 280,
         flexGrow: 1,
-        marginRight: 10
+        marginRight: 10,
+        marginBottom: "10rem"
     },
     card: {
-        minHeight: 400,
-        maxWidth: 300,
+        minHeight: 300,
+        maxWidth: 280,
     },
     cardTypo: {
         fontFamily: "Abhaya",
@@ -70,9 +71,7 @@ export default function InventoryOrg() {
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-
                                 <Typography className={classes.bottomTypo} align='center'>{item.price} BDT</Typography>
-
                             </Card>
 
                         </Grid>

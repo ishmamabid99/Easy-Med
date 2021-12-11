@@ -12,6 +12,7 @@ const checkAuth = (req, res, next) => {
         next();
     }
     catch (err) {
+        console.log(err)
         next(err)
     }
 }

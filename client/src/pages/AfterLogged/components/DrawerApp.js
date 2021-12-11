@@ -8,7 +8,7 @@ import Add from '@material-ui/icons/AddCircle';
 import MarketIcon from '@material-ui/icons/Store'
 const useStyles = makeStyles(theme => ({
     drawer: {
-        marginTop: "9.25vh"
+        marginTop: "9.15vh"
     },
     drawerMobile: {
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     typoDrawer: {
         fontFamily: "Abhaya",
         fontWeight: "500",
-        fontSize: '1.25rem',
+        fontSize: '1.15rem',
         color: "#2C2E43"
     },
     icons: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
     profile: {
         fontFamily: "Abhaya",
-        fontSize: "2rem",
+        fontSize: "1.5rem",
         fontWeight: "400",
         opacity: '0.7'
     }
@@ -43,7 +43,7 @@ export default function DrawerApp(props) {
     const isMatch = useMediaQuery(theme.breakpoints.down('sm'))
     const [openDrawer, setOpenDrawer] = React.useState(false);
 
-    const drawerWidth = 380;
+    const drawerWidth = 370;
     return (
         <div style={{ marginTop: "5rem" }}>
             {!isMatch ?
@@ -62,6 +62,7 @@ export default function DrawerApp(props) {
                     variant='permanent'
                     anchor="left">
                     <Toolbar >
+                    
                         <Typography className={classes.profile}>{props.state.name}</Typography>
                     </Toolbar>
                     <Divider />

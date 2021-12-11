@@ -36,9 +36,7 @@ function LoggdApp() {
     }, [])
     return (
         <>
-            <div>
-                <LoggedAppBar state={state} />
-            </div>
+
             {state ?
                 <div >
                     {state.role === 'USER' ?

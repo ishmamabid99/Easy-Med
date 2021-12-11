@@ -10,6 +10,7 @@ import OrganizationSignUp from './pages/OrganizationSignUp';
 import AuthApi from './AuthApi'
 import { checkState } from './methods/getData';
 import Cookies from 'js-cookie';
+import CartUser from './pages/AfterLogged/User/CartUser';
 function App() {
   const [auth, setAuth] = useState(undefined);
   async function checkCookies() {
@@ -46,6 +47,7 @@ const Routes = () => {
       <ProtectedLogin path="/organization-signup" auth={Auth.auth} component={OrganizationSignUp} />
       <ProtectedRoute path='/app' auth={Auth.auth} component={LoggdApp} />
       <ProtectedRoute path='/cart' auth={Auth.auth} component={Cart} />
+      <ProtectedRoute path='/cart-user' auth={Auth.auth} component={CartUser} />
     </Switch>
   )
 }

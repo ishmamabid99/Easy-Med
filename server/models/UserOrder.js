@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
 
-const productSchema = new mongoose.Schema({
-
-    img: {
-        type: String,
-        required: false
-    },
-    name: {
+const userOrderSchema = new mongoose.Schema({
+    buyer: {
         type: String,
         required: true
     },
-    _oid: {
+
+    img: {
+        type: String,
+        required: true
+    },
+    name: {
         type: String,
         required: true
     },
@@ -19,24 +19,20 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    productId: {
+        type: String,
+        required: true
+    },
     quantity: {
         type: String,
         required: true
     },
-    initial: {
+    seller: {
         type: String,
         required: true
     },
-    MFD: {
-        type: String,
-        required: true
-    },
-    EXP: {
-        type: String,
-        required: true
-    }
 });
 
-const Product = mongoose.model('product', productSchema);
+const UserOrder = mongoose.model('userOrder', userOrderSchema);
 
-module.exports = Product;
+module.exports = UserOrder;

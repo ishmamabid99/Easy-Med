@@ -48,3 +48,10 @@ export const SwlSubmitCart = () => {
         text: 'Please checkout from cart to confirm'
     })
 }
+export const SwlSubmitCartError = () => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Failed...',
+        text: 'Please specify the quantity'
+    })
+}

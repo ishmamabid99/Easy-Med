@@ -2,7 +2,7 @@ import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia,
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react'
 import { getMarketinfo } from '../../../methods/getData';
-import { SwlSubmitCart } from '../../../methods/Swal';
+import { SwlSubmitCart, SwlSubmitCartError } from '../../../methods/Swal';
 const useStyles = makeStyles(theme => ({
     root: {
         marginLeft: 300,
@@ -11,8 +11,8 @@ const useStyles = makeStyles(theme => ({
         marginRight: 10
     },
     card: {
-        minHeight: 450,
-        maxWidth: 300,
+        minHeight: 300,
+        maxWidth: 280,
     },
     cardTypo: {
         fontFamily: "Abhaya",
@@ -88,23 +88,30 @@ export default function LocalMarket(props) {
             quantity: quantity,
             buyer: props.state.name,
             seller: sendData.item.name,
-            price: sendData.item.price
+            price: sendData.item.price,
+            img: sendData.item.img
         }
-        let orders = Cookies.get('orders');
-        console.log(orders)
-        if (!orders) {
-            orders = [];
-            orders.push(order);
-            console.log(orders);
-            Cookies.set('orders', JSON.stringify(orders));
+        if (order.quantity && order.quantity > 0) {
+            let orders = Cookies.get('orders');
+            console.log(orders)
+            if (!orders) {
+                orders = [];
+                orders.push(order);
+                console.log(orders);
+                Cookies.set('orders', JSON.stringify(orders));
+            }
+            else {
+                let dt = JSON.parse(orders);
+                dt.push(order);
+                Cookies.set('orders', JSON.stringify(dt));
+            }
+            setModal(false)
+            SwlSubmitCart();
         }
         else {
-            let dt = JSON.parse(orders);
-            dt.push(order);
-            Cookies.set('orders', JSON.stringify(dt));
+            setModal(false)
+            SwlSubmitCartError();
         }
-        setModal(false)
-        SwlSubmitCart();
     }
     useEffect(() => {
         getData();

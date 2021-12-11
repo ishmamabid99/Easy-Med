@@ -14,7 +14,9 @@ const DrawerComponent = (props) => {
   const { button1, button2, button3, button4 } = props;
   const useStyles = makeStyles(theme => ({
 
-    drawerContainer: {}
+    drawerContainer: {
+     fill:'#42bdff'
+    }
     ,
     iconButtonContainer: {
       marginLeft: 'auto',

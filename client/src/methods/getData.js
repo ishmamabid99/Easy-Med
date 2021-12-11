@@ -65,3 +65,18 @@ export const getMarketinfo = async () => {
         return null;
     }
 }
+export const getOrderDataLarge = async () => {
+    const token = Cookies.get('access');
+    const decode = jwt_decode(token);
+    const res = await axios.get(`/getlargeorder/${decode._id}`, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    })
+    if (res.status === 200) {
+        return res;
+    }
+    else {
+        return null
+    }
+}

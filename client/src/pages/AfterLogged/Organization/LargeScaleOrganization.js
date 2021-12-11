@@ -24,7 +24,7 @@ export default function LargeScaleOrganization(props) {
                 null
             }
             {page === 'analytics' ?
-                <AnalyticsOrg />
+                <AnalyticsOrg state={props.state} />
                 :
                 null
             }

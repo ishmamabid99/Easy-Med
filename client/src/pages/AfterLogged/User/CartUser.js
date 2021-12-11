@@ -1,10 +1,8 @@
 import { Avatar, Box, Button, Grid, IconButton, makeStyles, Paper, Typography } from '@material-ui/core'
 import Cookies from 'js-cookie';
 import React from 'react'
-import Add from '@material-ui/icons/Add'
-import Remove from '@material-ui/icons/Remove'
-import LoggedAppBar from './components/LoggedAppBar'
-import { postLocalOrder } from '../../methods/postData';
+import LoggedAppBar from '../components/LoggedAppBar'
+import axios from '.././../../methods/axios'
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: "#FFF",
@@ -78,14 +76,14 @@ const useStyles = makeStyles(theme => ({
         fontSize: "1.5rem"
     }
 }))
-export default function Cart() {
+export default function CartUser() {
     const classes = useStyles();
     const [order, setOrder] = React.useState([]);
     const [total, setTotal] = React.useState(0);
     const [updateprice, setUpdate] = React.useState(0)
 
     React.useEffect(() => {
-        const data = Cookies.get('orders');
+        const data = Cookies.get('orders_user');
         if (data) {
             setOrder(JSON.parse(data));
             const dt = JSON.parse(data);
@@ -165,12 +163,20 @@ export default function Cart() {
                     </Paper>
                     <Grid style={{ width: 300, }} container justifyContent="space-around">
                         <Button onClick={() => {
-                            Cookies.remove('orders');
-                            postLocalOrder(order)
-                            window.location.href = '/app'
+                            const token = Cookies.get('access');
+                            Cookies.remove('orders_user',);
+                            const res = axios.post('/orderfromuser', { data: order }, {
+                                headers: {
+                                    Authorization: "Bearer " + token
+                                }
+                            }).then(res => {
+                                if (res.status === 200) {
+                                    window.location.href = '/app'
+                                }
+                            })
                         }} variant='contained' color='primary' className={classes.btn}>Checkout</Button>
                         <Button onClick={() => {
-                            Cookies.remove('orders');
+                            Cookies.remove('orders_user');
                             window.location.href = '/app'
                         }} variant='contained' color='secondary' className={classes.btn}>Cancel</Button>
                     </Grid>

@@ -71,7 +71,6 @@ export const postProduct = async (data) => {
     }
 }
 export const updateProduct = async (file, _id) => {
-    alert(_id)
     const formData = new FormData();
     const cookie = jwt_decode(token);
     formData.append('articleImage', file);
@@ -88,6 +87,96 @@ export const updateProduct = async (file, _id) => {
         return false
     }
 }
-export const postLocalOrder = async () => {
+export const postLocalOrder = async (data) => {
+    console.log(data)
+    const res = await axios.post('/postlocalorder', { data: data }, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    })
+    if (res.status === 200) {
+        return true
+    }
+    else {
+        return false;
+    }
 
+}
+export const updateInventory = async (data) => {
+
+    const res = await axios.post('/updateinventory', { data: data }, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    })
+    if (res.status === 200) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+export const deleteOrder = async (data) => {
+    const res = await axios.post('/deleteorder', { data: data }, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+    if (res.status === 200) {
+        return res.data
+    }
+    else {
+        return false
+    }
+}
+export const addToLocal = async (data) => {
+    const decode = jwt_decode(token)
+    const newData = {
+        buyer: data.buyer,
+        img: data.img,
+        price: data.price,
+        productId: data.productId,
+        quantity: data.quantity,
+        seller: data.seller,
+        my_id: decode._id
+    }
+    const res = await axios.post('/addtolocal', { data: newData }, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+    if (res.status === 200) {
+        return res.data;
+    }
+    else {
+        return false
+    }
+}
+export const getMarketData = async (data) => {
+    console.log(data)
+    const res = await axios.post('/getusermarket', { data: data }, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+    if (res.status === 200) {
+        return res.data;
+    }
+    else {
+        return false
+    }
+}
+export const postUserOrder = async (data) => {
+    console.log(data)
+    const res = await axios.post('/postuserorder', { data: data }, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    })
+    if (res.status === 200) {
+        return true
+    }
+    else {
+        return false;
+    }
 }

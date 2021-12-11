@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { AppBar, Avatar, Box, Button, Grid, IconButton, makeStyles, MenuItem, Modal, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Avatar, Box, Button, Grid, IconButton, InputBase, makeStyles, MenuItem, Modal, TextField, Toolbar, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import LogOut from '@material-ui/icons/ExitToApp'
 import Cart from '@material-ui/icons/ShoppingCart'
+import axios from '../../../methods/axios'
 import Cookies from 'js-cookie'
 import jwt_decode from 'jwt-decode';
+import SearchIcon from '@material-ui/icons/Search'
 const useStyles = makeStyles(theme => ({
     title: {
         fontFamily: "Abhaya libre",
@@ -72,13 +74,26 @@ const useStyles = makeStyles(theme => ({
     modalGrid: {
         marginTop: "1.5rem"
     },
-
+    inputField: {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
+        fontSize: '.75rem'
+    },
+    input: {
+        height: "5vh",
+        borderRadius: 20,
+        background: "#EEEEEE",
+        width: '30vw',
+        marginLeft: '1vw'
+    },
 }))
 function LoggedAppBar(props) {
     const token = Cookies.get('access');
     const role = jwt_decode(token)._role;
     const classes = useStyles();
     const [modal, setModal] = useState(false);
+    const [search, setSearch] = useState(false)
+    const [hidden, setHidden] = useState(false)
     const handleLogout = () => {
         setModal(true);
     }
@@ -106,14 +121,47 @@ function LoggedAppBar(props) {
                     </Grid>
                 </Box>
             </Modal>
-            <div style={{ marginBottom: "4rem" }}>
+            <div style={{ marginBottom: "6rem" }}>
                 <AppBar color='inherit'>
                     <Grid container justifyContent='space-between'>
                         <Toolbar>
                             <Avatar src='../../logo512.png' />
-                            <MenuItem component={Link} to='/app' className={classes.title}>Easy-Med</MenuItem>
+                            {!hidden ? <MenuItem component={Link} to='/app' className={classes.title}>Easy-Med</MenuItem> : null}
                         </Toolbar>
                         <Toolbar>
+                            {props.showSearch ?
+                                <>{hidden ?
+                                    <InputBase
+
+                                        className={classes.input}
+                                        onChange={(e) => {
+                                            const token = Cookies.get('access')
+                                            if (e.target.value !== '') {
+                                                axios.get(`/search/${e.target.value}`, {
+                                                    headers: {
+                                                        Authorization: "Bearer " + token
+                                                    }
+                                                }).then(res => {
+                                                    console.log(res.data)
+                                                    setSearch(res.data)
+                                                })
+                                            }
+                                        }}
+                                        placeholder="Search Restaurant"
+                                        inputProps={{ 'aria-label': 'search', className: classes.inputField }}
+                                    /> :
+                                    null
+                                }
+                                    <IconButton onClick={() => {
+                                        setSearch(null)
+                                        setHidden(!hidden)
+                                    }}>
+                                        <SearchIcon className={classes.icon} />
+                                    </IconButton>
+                                </>
+                                : null
+
+                            }
                             {role === 'LOCAL' ?
                                 <Link to='/cart'>
                                     <IconButton>
@@ -122,6 +170,16 @@ function LoggedAppBar(props) {
                                 </Link>
                                 :
                                 null
+                            }
+                            {role === 'USER' ?
+                                <Link to='/cart-user'>
+                                    <IconButton>
+                                        <Cart className={classes.icon} />
+                                    </IconButton>
+                                </Link>
+                                :
+                                null
+
                             }
                             <IconButton onClick={handleLogout}>
                                 <LogOut className={classes.icon} />

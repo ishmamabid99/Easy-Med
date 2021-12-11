@@ -1,17 +1,25 @@
 const mongoose = require("mongoose");
 
 
-const productSchema = new mongoose.Schema({
+const inventorySchema = new mongoose.Schema({
 
-    img: {
-        type: String,
-        required: false
-    },
-    name: {
+    productId: {
         type: String,
         required: true
     },
-    _oid: {
+    initial: {
+        type: String,
+        requried: true
+    },
+    quantity: {
+        type: String,
+        requried: true
+    },
+    buyer: {
+        type: String,
+        required: true
+    },
+    seller: {
         type: String,
         required: true
     },
@@ -19,24 +27,16 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    quantity: {
+    img: {
         type: String,
         required: true
     },
-    initial: {
-        type: String,
-        required: true
-    },
-    MFD: {
-        type: String,
-        required: true
-    },
-    EXP: {
-        type: String,
+    geoLocation: {
+        type: Object,
         required: true
     }
 });
 
-const Product = mongoose.model('product', productSchema);
+const LocalInventory = mongoose.model('inventory', inventorySchema);
 
-module.exports = Product;
+module.exports = LocalInventory;

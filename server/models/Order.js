@@ -1,21 +1,9 @@
 const mongoose = require("mongoose");
 
 
-const productSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
 
-    img: {
-        type: String,
-        required: false
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    _oid: {
-        type: String,
-        required: true
-    },
-    price: {
+    productId: {
         type: String,
         required: true
     },
@@ -23,20 +11,24 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    initial: {
+    buyer: {
         type: String,
         required: true
     },
-    MFD: {
+    seller: {
         type: String,
         required: true
     },
-    EXP: {
+    price: {
+        type: String,
+        required: true
+    },
+    img: {
         type: String,
         required: true
     }
 });
 
-const Product = mongoose.model('product', productSchema);
+const Order = mongoose.model('order', orderSchema);
 
-module.exports = Product;
+module.exports = Order;

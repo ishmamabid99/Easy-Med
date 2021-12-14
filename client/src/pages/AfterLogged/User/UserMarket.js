@@ -5,7 +5,7 @@ import { getMarketData } from '../../../methods/postData'
 import { SwlSubmitCart, SwlSubmitCartError } from '../../../methods/Swal';
 const useStyles = makeStyles(theme => ({
     root: {
-        marginLeft: 280,
+        marginLeft: 200,
         flexGrow: 1,
         height: "100vh",
         marginRight: 10

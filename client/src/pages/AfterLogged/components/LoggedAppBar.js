@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppBar, Avatar, Box, Button, Grid, IconButton, InputBase, makeStyles, MenuItem, Modal, TextField, Toolbar, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import LogOut from '@material-ui/icons/ExitToApp'
@@ -88,8 +88,9 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 function LoggedAppBar(props) {
+    console.log(props.state.role)
     const token = Cookies.get('access');
-    const role = jwt_decode(token)._role;
+    const [role, setRole] = useState(undefined)
     const classes = useStyles();
     const [modal, setModal] = useState(false);
     const [search, setSearch] = useState(false)
@@ -104,6 +105,9 @@ function LoggedAppBar(props) {
         Cookies.remove('access');
         window.location.href = '/login'
     }
+    useEffect(() => {
+        setRole(props.state.role);
+    }, [])
     return (
         <div>
             <Modal onClose={handleClose} open={modal}>
@@ -179,6 +183,10 @@ function LoggedAppBar(props) {
                                 </Link>
                                 :
                                 null
+
+                            }
+                            {role === 'ADMIN' ?
+                                null : null
 
                             }
                             <IconButton onClick={handleLogout}>

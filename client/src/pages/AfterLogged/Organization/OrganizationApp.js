@@ -1,4 +1,5 @@
 import React from 'react'
+import Home from '../Admin/Home'
 import LoggedAppBar from '../components/LoggedAppBar'
 import Incomplete from './Incomplete'
 import LargeScaleOrganization from './LargeScaleOrganization'
@@ -10,21 +11,29 @@ export default function OrganizationApp(props) {
             <div>
                 <LoggedAppBar state={props.state} />
             </div>
-            {props.state.role === 'INCOMPLETE' ?
-                <div>
-                    <Incomplete state={props.state} />
-                </div>
+            {props.state.role === 'ADMIN' ?
+                <Home state={props.state} />
+
                 :
-                <div>
-                    {props.state.role === 'LOCAL' ?
-                        <LocalOrganization state={props.state} />
+                <>
+                    {props.state.role === 'INCOMPLETE' ?
+                        <div>
+                            <Incomplete state={props.state} />
+                        </div>
                         :
-                        <LargeScaleOrganization state={props.state} />
+                        <div>
+                            {props.state.role === 'LOCAL' ?
+                                <LocalOrganization state={props.state} />
+                                :
+                                <LargeScaleOrganization state={props.state} />
+                            }
+
+                        </div>
+
                     }
-
-                </div>
-
+                </>
             }
+
         </div>
     )
 }

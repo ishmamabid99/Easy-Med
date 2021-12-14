@@ -80,3 +80,61 @@ export const getOrderDataLarge = async () => {
         return null
     }
 }
+export const getAllOrg = async () => {
+    const token = Cookies.get('access');
+    const res = await axios.get('/getallorg', {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+    if (res.status === 200) {
+        return res.data;
+    }
+    else return null;
+}
+export const getAllUser = async () => {
+    const token = Cookies.get('access');
+    const res = await axios.get('/getalluser', {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+    if (res.status === 200) return res.data;
+    else return null;
+}
+export const deleteOrg = async (data) => {
+    const token = Cookies.get('access');
+    const res = await axios.get('/deleteorg/' + data, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+    if (res.status === 200) {
+        return true;
+    }
+    else return null
+}
+export const getAllUserData = async () => {
+    const token = Cookies.get('access');
+    const res = await axios.get('/getalluser', {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+    if (res.status === 200) {
+        return res;
+    }
+    else return null;
+}
+export const deleteUser = async (data) => {
+    const token = Cookies.get('access');
+    const res = await axios.get('/deleteuser/' + data, {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+    if (res.status === 200) {
+        return true;
+    }
+    else return null
+}

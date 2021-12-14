@@ -116,9 +116,12 @@ export default function Cart() {
             }
         });
     }
+    const state = {
+        role: "LOCAL"
+    }
     return (
         <div>
-            <LoggedAppBar />
+            <LoggedAppBar state={state} />
             <div className={classes.div} align='center'>{order ?
 
                 <div>

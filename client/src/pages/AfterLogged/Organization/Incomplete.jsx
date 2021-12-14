@@ -54,7 +54,7 @@ export default function Incomplete() {
             const res1 = updateRes(data);
             const res2 = updateProfile(file);
             Promise.all([res1, res2]).then(() => {
-                window.location.href('/app')
+                window.location.href = '/app'
             })
         }
         else {

@@ -406,3 +406,57 @@ module.exports.getMyOrder = async (req, res) => {
         res.status(404).json(err)
     }
 }
+module.exports.getAllOrg = async (req, res) => {
+    try {
+        const result = await Organization.find({});
+        console.log(result)
+        if (result.length !== 0) {
+            res.status(200).json(result)
+        }
+        else {
+            res.status(202).json(false)
+        }
+    }
+    catch (err) {
+        console.log(err);
+        res.status(404).json(err)
+    }
+}
+module.exports.deleteOrg = async (req, res) => {
+    try {
+        const result = await Organization.deleteOne({ _id: req.params._id });
+        if (result) {
+            res.status(200).json(true);
+        }
+
+    }
+    catch (err) {
+        console.log(err);
+        res.status(404).json(err)
+    }
+}
+module.exports.getAllUserData = async (req, res) => {
+    try {
+        const result = await User.find({});
+        if (result) {
+            res.status(200).json(result);
+        }
+    }
+    catch (err) {
+        console.log(err)
+        res.status(404).json(err)
+    }
+}
+module.exports.deleteUser = async (req, res) => {
+    try {
+        const result = await User.deleteOne({ _id: req.params._id });
+        if (result) {
+            res.status(200).json(true)
+        }
+        else null
+    }
+    catch (err) {
+        console.log(err);
+        res.status(404).json(err)
+    }
+}

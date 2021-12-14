@@ -5,7 +5,7 @@ const { Check, addOrganization, addUser, loginUser } = require('./loginControlle
 const { updateProductOrder, updateRes, postLocalOrder, updateProfile,
     getInfo, postProduct, updateProduct, getInventory, getMarketInfo,
     getOrderLarge, deleteOrder, addToLocal, getUserMarket, getLocalInventory,
-    orderFromUser, getUserOrder, deleteUserOrder, accpetUserOrder, getLargeData, getSmallData, showSearch, getMyOrder } = require('./updateController');
+    orderFromUser, getUserOrder, deleteUserOrder, accpetUserOrder, getLargeData, getSmallData, showSearch, getMyOrder, getAllOrg, deleteOrg, getAllUserData, deleteUser } = require('./updateController');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -45,4 +45,8 @@ router.get('/largedata/:_id', checkAuth, getLargeData);
 router.get('/smalldata/:_id', checkAuth, getSmallData)
 router.get('/search/:_id', checkAuth, showSearch);
 router.get('/myorders/:_id', checkAuth, getMyOrder);
+router.get('/getallorg', checkAuth, getAllOrg);
+router.get('/deleteorg/:_id', checkAuth, deleteOrg);
+router.get('/getalluser', checkAuth, getAllUserData);
+router.get('/deleteuser/:_id', checkAuth, deleteUser)
 module.exports = router;

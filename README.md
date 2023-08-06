@@ -1,29 +1,25 @@
-# CSE333-WEB-Solution-of-PharmaMarket-Supply
-An academic project  for ensuring supply  of medicine from  pharmacy factory to  pharmacy and patient by a web-app 
+# EasyMed-A WEB-Solution of PharmaMarket Supply
+Ensuring the supply of medicine from pharmacy factory to pharmacy and patient by a web app.
 
 
+Once the repository is cloned, you will see two folders 
+1. Client
+2. Server
 
-We created this for educational purpose.This is developed using mern stack
-
-
-Once the repository is cloned you will see two folders 
-1.Client
-2.Server
-
-you need to go to client folder and need to run
+you need to go to the client folder and need to run
 # npm install && npm start
 
 now a react app will open in your browser
 
 
-Later on you need to go server folder and need to run 
+Later on, you need to go server folder and need to run 
 
 #nodemon server.js
 
 The backend will start then
 
 
-There are some env variables in an env file which cannot be provided
+There are some env variables in an env file that cannot be provided
 
 URL=<Your mongo uri>
 JWT_SECRET=<Your jwt secret>
@@ -41,4 +37,4 @@ mongo atlas
 
 There is a preview of this project available on https://drive.google.com/file/d/1SERQulIeXDx3ZZmL3eJxBveB7DeXGpa2/view?usp=sharing
 
-on this link you can see a demo version of this project spoken in bengali
+on this link, you can see a demo version of this project spoken in bengali
